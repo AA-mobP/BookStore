@@ -1,4 +1,5 @@
 using BookStore.Models;
+using BookStore.Models.BusinessLayer;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace BookStore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly clsHome _home;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, clsHome home)
         {
             _logger = logger;
+            _home = home;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var model = _home.ShowAll();
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -28,5 +32,6 @@ namespace BookStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
