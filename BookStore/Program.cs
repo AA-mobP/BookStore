@@ -1,4 +1,5 @@
 using BookStore.Models;
+using BookStore.Models.BusinessLayer;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore
@@ -13,6 +14,8 @@ namespace BookStore
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<BookDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("BookStoreConnection")));
+            builder.Services.AddScoped<IclsHome, clsHome>();
+            builder.Services.AddScoped<IclsDetails, clsDetails>();
 
             var app = builder.Build();
 

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using BookStore.Models.ViewModels
+@model List<BooksViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 <!-- Start Hero Section -->
@@ -26,174 +28,25 @@
 <div class="product-section">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover4.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover1.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover4.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 mb-5">
-                <div class="product-item">
-                    <a asp-controller="Details" asp-action="Index">
-                        <img src="~/Assets/images/BookCover1.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$47.00</strong>
-                    </a>
-                    <a asp-controller="Cart" asp-action="Add">
-                        <span class="icon-cross">
-                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-            </div>
+            @{
+                foreach(BooksViewModel book in Model)
+                {
+                    <div class="col-12 col-md-4 col-lg-3 mb-5">
+                        <div class="product-item">
+                            <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
+                                <img src="~/Assets/images/@book.PhotoUrl" class="img-fluid product-thumbnail">
+                                <h3 class="product-title">@book.Name</h3>
+                                <strong class="product-price">@book.Price</strong>
+                            </a>
+                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
+                                <span class="icon-cross">
+                                    <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
         </div>
     </div>
 </div>

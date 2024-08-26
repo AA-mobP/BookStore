@@ -8,9 +8,9 @@ namespace BookStore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly clsHome _home;
+        private readonly IclsHome _home;
 
-        public HomeController(ILogger<HomeController> logger, clsHome home)
+        public HomeController(ILogger<HomeController> logger, IclsHome home)
         {
             _logger = logger;
             _home = home;
@@ -18,8 +18,7 @@ namespace BookStore.Controllers
 
         public IActionResult Index()
         {
-            var model = _home.ShowAll();
-            return View(model);
+            return View(_home.ShowAll());
         }
 
         public IActionResult Privacy()
