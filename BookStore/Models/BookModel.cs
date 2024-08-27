@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Permissions;
 
 namespace BookStore.Models
 {
@@ -28,10 +29,10 @@ namespace BookStore.Models
         [Range(0, 3000)]
         public int PublishYear { get; set; }
 
-        [Url]
-        [MaxLength(100)]
-        public string PhotoURL { get; set; }
-        
-        public ICollection<CategoryModel> Categories { get; set; }
+        [MaxLength(50)]
+        public string PhotoName { get; set; }
+        [MaxLength(25)]
+        public string Type { get; set; }
+        public ICollection<GenreModel> Genres { get; set; }
     }
 }

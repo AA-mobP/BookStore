@@ -11,14 +11,14 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="product-item">
-                        <img src="~/Assets/images/@Model.PhotoURL" class="img-fluid product-thumbnail">
+                        <img src="~/Assets/images/@Model.PhotoName" class="img-fluid product-thumbnail">
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="text-black">
                         <div class="product-title">
-                            <h3>@Model.Name/h3>
-                            <span><b>@Model.AuthorName</b></span>
+                            <h1>@Model.Name</h1>
+                            <span><h4>@Model.AuthorName</h4></span>
                         </div>
                         <p>
                             @Model.Synopsis
@@ -27,22 +27,22 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
-                                        <li><span>الاسم</span> @Model.Name</li>
-                                        <li><span>اسم الكاتب</span> @Model.AuthorName</li>
+                                        <li><span class="text-danger">الاسم</span> @Model.Name</li>
+                                        <li><span class="text-danger">اسم الكاتب</span> @Model.AuthorName</li>
                                         
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
                                     <ul>
-                                        <li><span>سنة النشر</span> @Model.PublishYear</li>
-                                        <li><span>التصنيفات</span> Action, Adventure, Fantasy, Magic</li>
+                                        <li><span class="text-danger">سنة النشر</span> @Model.PublishYear</li>
+                                        <li><span class="text-danger">التصنيفات</span> @string.Join(',', ViewBag.Genres)</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="btn btn-primary">
-                            <a href="#" class="btn btn-success"><i class="fa fa-heart-o"></i> Add to Cart</a>
-                            <a href="#" class="btn btn-warning">
+                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.BookId" class="btn btn-success"><i class="fa fa-heart-o"></i> Add to Cart</a>
+                            <a asp-controller="Payment" asp-action="Index" asp-route-id="@Model.BookId" class="btn btn-warning">
                                 <span>Pay Now</span> <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
@@ -57,272 +57,78 @@
                         <h5>From Same Author</h5>
                     </div>
                     <div class="row">
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
+                        @{
+                            foreach (var book in ViewBag.RelevantAuthor)
+                            {
+                                <div class="col-6 col-md-2 col-lg-2 mb-5">
+                                    <div class="product-item">
+                                        <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
+                                            <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
+                                            <h3 class="product-title">@book.Name</h3>
+                                            <strong class="product-price">@book.Price</strong>
+                                        </a>
+                                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
+                                            <span class="icon-cross">
+                                                <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-8">
                     <div class="section-title">
-                        <h5>From Same Author</h5>
+                        <h5>From Same Type</h5>
                     </div>
                     <div class="row">
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
+                        @{
+                            foreach (var book in ViewBag.RelevantType)
+                            {
+                                <div class="col-6 col-md-2 col-lg-2 mb-5">
                             <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
+                                        <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
+                                    <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
+                                    <h3 class="product-title">@book.Name</h3>
+                                    <strong class="product-price">@book.Price</strong>
                                 </a>
-                                <a asp-controller="Cart" asp-action="Add">
+                                <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
                                     <span class="icon-cross">
                                         <img src="~/Assets/images/cross.svg" class="img-fluid">
                                     </span>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
+                            }
+                        }
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-8">
                     <div class="section-title">
-                        <h5>From Same Author</h5>
+                        <h5>From Same Year</h5>
                     </div>
                     <div class="row">
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
-                                <a asp-controller="Book" asp-action="Index">
-                                    <img src="~/Assets/images/BookCover2.png" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">Nordic Chair</h3>
-                                    <strong class="product-price">$47.00</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
+                        @{
+                            foreach (var book in ViewBag.RelevantYear)
+                            {
+                                <div class="col-6 col-md-2 col-lg-2 mb-5">
+                                    <div class="product-item">
+                                        <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
+                                            <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
+                                            <h3 class="product-title">@book.Name</h3>
+                                            <strong class="product-price">@book.Price</strong>
+                                        </a>
+                                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
+                                            <span class="icon-cross">
+                                                <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>

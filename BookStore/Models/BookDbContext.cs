@@ -7,7 +7,7 @@ namespace BookStore.Models
         public BookDbContext(DbContextOptions<BookDbContext> options) : base(options) {}
 
         public DbSet<BookModel> tblBooks { get; set; }
-        public DbSet<CategoryModel> tblCategories { get; set; }
+        public DbSet<GenreModel> tblGenres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -15,7 +15,7 @@ namespace BookStore.Models
 
             modelBuilder.Entity<BookModel>(model =>
             {
-                model.HasMany(x => x.Categories).WithMany(x => x.Books);
+                model.HasMany(x => x.Genres).WithMany(x => x.Books);
             });
         }
     }

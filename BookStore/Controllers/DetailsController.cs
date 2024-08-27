@@ -15,9 +15,11 @@ namespace BookStore.Controllers
 		public IActionResult Index(int id)
 		{
 			BookModel book = _details.GetBook(id);
-			ViewData["Categories"] = book.Categories.ToList();
-			ViewData["RelevantYear"] = _details.GetRelevantYear(id, 6);
-            return View();
+			ViewData["Genres"] = _details.GetGenres(id);
+			ViewData["RelevantYear"] = _details.GetRelevantYear(book.PublishYear, 6);
+			ViewData["RelevantAuthor"] = _details.GetRelevantAuthor(book.AuthorName, 6);
+			ViewData["RelevantType"] = _details.GetRelevantType(book.Type, 6);
+            return View(book);
 		}
 	}
 }
