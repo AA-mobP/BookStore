@@ -1,6 +1,10 @@
 using BookStore.Models;
 using BookStore.Models.BusinessLayer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using BookStore.Models.Repository;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace BookStore
 {
@@ -12,10 +16,30 @@ namespace BookStore
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddMvc();
             builder.Services.AddDbContext<BookDbContext>(options => options.UseSqlServer(
                 builder.Configuration.GetConnectionString("BookStoreConnection")));
+
+            //builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BookDbContext>();
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+
+                options.User.RequireUniqueEmail = true;
+
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<BookDbContext>()
+            .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+            
             builder.Services.AddScoped<IclsHome, clsHome>();
             builder.Services.AddScoped<IclsDetails, clsDetails>();
+            builder.Services.AddScoped<IclsProfile, clsProfile>();
 
             var app = builder.Build();
 
@@ -31,12 +55,19 @@ namespace BookStore
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
+            app.UseAuthentication();
             app.UseAuthorization();
+
+			app.MapControllerRoute(
+               name: "area",
+               pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.UseEndpoints(endpoint => endpoint.MapRazorPages());
 
             app.Run();
         }

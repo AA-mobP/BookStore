@@ -1,0 +1,61 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-action="Edit">
+                <h3>Edit Your Profile</h3>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" disabled class="form-control" aria-required="true" />
+                    <label asp-for="Email">Email</label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="PhoneNumber" class="form-control" aria-required="true" />
+                    <label asp-for="PhoneNumber">Phone Number</label>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="FirstName" class="form-control" aria-required="true" />
+                    <label asp-for="FirstName">First Name</label>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="LastName" class="form-control" aria-required="true" />
+                    <label asp-for="LastName">Last Name</label>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Governorate" class="form-control" aria-required="true" />
+                    <label asp-for="Governorate">Governorate</label>
+                    <span asp-validation-for="Governorate" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="City" class="form-control" aria-required="true" />
+                    <label asp-for="City">City</label>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="DetailedAddress" class="form-control" aria-required="true" />
+                    <label asp-for="DetailedAddress">Detailed Address</label>
+                    <span asp-validation-for="DetailedAddress" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="PostalCode" class="form-control" aria-required="true" />
+                    <label asp-for="PostalCode">Postal Code</label>
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
