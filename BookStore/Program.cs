@@ -40,6 +40,7 @@ namespace BookStore
             builder.Services.AddScoped<IclsHome, clsHome>();
             builder.Services.AddScoped<IclsDetails, clsDetails>();
             builder.Services.AddScoped<IclsProfile, clsProfile>();
+            builder.Services.AddScoped<IclsCart, clsCart>();
 
             var app = builder.Build();
 

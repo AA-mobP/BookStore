@@ -7,6 +7,11 @@ namespace BookStore.Models
 {
     public class BookModel
     {
+        public BookModel()
+        {
+            CartItems = new List<BookUserModel>();
+        }
+
         [Key]
         public int BookId { get; set; }
 
@@ -31,8 +36,10 @@ namespace BookStore.Models
 
         [MaxLength(50)]
         public string PhotoName { get; set; }
+        public int LeftQuantity { get; set; }
         [MaxLength(25)]
         public string Type { get; set; }
         public ICollection<GenreModel> Genres { get; set; }
+        public ICollection<BookUserModel> CartItems { get; set; }
     }
 }

@@ -38,11 +38,11 @@
                                 <h3 class="product-title">@book.Name</h3>
                                 <strong class="product-price">@book.Price</strong>
                             </a>
-                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
+                            <button onclick="addToCart(@book.Id, 1)">
                                 <span class="icon-cross">
                                     <img src="~/Assets/images/cross.svg" class="img-fluid">
                                 </span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                 }
@@ -51,3 +51,27 @@
     </div>
 </div>
 <!-- End Book Section -->
+@section Scripts{
+    <script>
+        function addToCart(Id, quan) {
+            $.ajax({
+                type: "POST",
+                url: "/Cart/Add",
+                data: {
+                    bookId: Id,
+                    quantity: quan
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    } else {
+                        alert("Failed to add product.");
+                    }
+                },
+                error: function () {
+                    alert("An error occurred.");
+                }
+            });
+        }
+    </script>
+}

@@ -5,6 +5,10 @@ namespace BookStore.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            CartItems = new List<BookUserModel>();
+        }
         [Required]
         [MaxLength(25)]
         public string FirstName { get; set; }
@@ -23,5 +27,6 @@ namespace BookStore.Models
         [Required]
         [MaxLength(5)]
         public string PostalCode { get; set; }
+        public ICollection<BookUserModel> CartItems { get; set; }
     }
 }

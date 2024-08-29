@@ -12,6 +12,7 @@ namespace BookStore.Models
         public DbSet<BookModel> tblBooks { get; set; }
         public DbSet<GenreModel> tblGenres { get; set; }
 		public DbSet<ApplicationUser> ReaderModel { get; set; } = default!;
+        public DbSet<BookUserModel> CartItems { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -41,7 +41,8 @@
                             </div>
                         </div>
                         <div class="btn btn-primary">
-                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.BookId" class="btn btn-success"><i class="fa fa-heart-o"></i> Add to Cart</a>
+                            <input type="number" id="Quantity" value="1"/>
+                            <button onclick="addToCart(@Model.BookId")" class="btn btn-success"><i class="fa fa-heart-o"></i> Add to Cart</button>
                             <a asp-controller="Payment" asp-action="Index" asp-route-id="@Model.BookId" class="btn btn-warning">
                                 <span>Pay Now</span> <i class="fa fa-angle-right"></i>
                             </a>
@@ -76,7 +77,6 @@
                                 </div>
                             }
                         }
-                        
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-8">
@@ -135,3 +135,45 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    <script>
+        function addToCart(Id) {
+            let quan = document.getElementById('Quantity').value;
+            $.ajax({
+                type: "POST",
+                url: "/Cart/Add",
+                data: {
+                    "bookId": Id,
+                    "quantity": quan
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    } else {
+                        alert("Failed to add product.");
+                    }
+                },
+                error: function () {
+                    alert("An error occurred.");
+                }
+            });
+        }
+    </script>
+    @* <script>
+        function addToCart(Id) {
+            console.log(Id);
+            $.ajax({
+                url: "/Cart/Add",
+                data: { "deptId": deptID },
+                type: "GET",
+                success: function (result) {
+                    console.log(result);
+                    document.getElementById("RelativeInstructors").innerHTML = result;
+                }
+            });
+        }
+    </script> *@
+
+
+}

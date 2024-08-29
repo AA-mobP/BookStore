@@ -4,6 +4,7 @@ using BookStore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Migrations
 {
     [DbContext(typeof(BookDbContext))]
-    partial class BookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240829124811_AddCartItems")]
+    partial class AddCartItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,9 +149,6 @@ namespace BookStore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("LeftQuantity")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -180,7 +180,7 @@ namespace BookStore.Migrations
                     b.ToTable("tblBooks", "production");
                 });
 
-            modelBuilder.Entity("BookStore.Models.BookUserModel", b =>
+            modelBuilder.Entity("BookStore.Models.CartModel", b =>
                 {
                     b.Property<int>("CartId")
                         .ValueGeneratedOnAdd()
@@ -218,7 +218,7 @@ namespace BookStore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CartItems", "production");
+                    b.ToTable("CartModel", "production");
                 });
 
             modelBuilder.Entity("BookStore.Models.GenreModel", b =>
@@ -387,7 +387,7 @@ namespace BookStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookStore.Models.BookUserModel", b =>
+            modelBuilder.Entity("BookStore.Models.CartModel", b =>
                 {
                     b.HasOne("BookStore.Models.BookModel", "Book")
                         .WithMany("CartItems")
