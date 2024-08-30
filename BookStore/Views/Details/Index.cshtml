@@ -29,7 +29,7 @@
                                     <ul>
                                         <li><span class="text-danger">الاسم</span> @Model.Name</li>
                                         <li><span class="text-danger">اسم الكاتب</span> @Model.AuthorName</li>
-                                        
+
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
@@ -40,13 +40,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="btn btn-primary">
-                            <input type="number" id="Quantity" value="1"/>
-                            <button onclick="addToCart(@Model.BookId")" class="btn btn-success"><i class="fa fa-heart-o"></i> Add to Cart</button>
-                            <a asp-controller="Payment" asp-action="Index" asp-route-id="@Model.BookId" class="btn btn-warning">
-                                <span>Pay Now</span> <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
+                        @{
+                            if (!ViewBag.BooksNames.Contains(Model.Name))
+                            {
+                                <div id="Added@(Model.BookId)" class="btn btn-primary">
+                                    <a href="#" onclick="AddToCart(@Model.BookId)" class="btn btn-success"><i class="fa fa-heart-o"></i> Add to Cart</a>
+                                    @* <a asp-controller="Payment" asp-action="Index" asp-route-id="@Model.BookId" class="btn btn-warning">
+                            <span>Pay Now</span> <i class="fa fa-angle-right"></i>
+                            </a> *@
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -55,7 +59,7 @@
             <div class="product-section">
                 <div class="col-lg-12 col-md-8">
                     <div class="section-title">
-                        <h5>From Same Author</h5>
+                        <h5>من نفس المؤلف</h5>
                     </div>
                     <div class="row">
                         @{
@@ -68,11 +72,14 @@
                                             <h3 class="product-title">@book.Name</h3>
                                             <strong class="product-price">@book.Price</strong>
                                         </a>
-                                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
-                                            <span class="icon-cross">
-                                                <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                            </span>
-                                        </a>
+                                        @if (!ViewBag.BooksNames.Contains(book.Name))
+                                        {
+                                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
+                                                <span class="icon-cross">
+                                                    <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                                </span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             }
@@ -81,33 +88,36 @@
                 </div>
                 <div class="col-lg-12 col-md-8">
                     <div class="section-title">
-                        <h5>From Same Type</h5>
+                        <h5>من نفس النوع</h5>
                     </div>
                     <div class="row">
                         @{
                             foreach (var book in ViewBag.RelevantType)
                             {
                                 <div class="col-6 col-md-2 col-lg-2 mb-5">
-                            <div class="product-item">
+                                    <div class="product-item">
                                         <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
-                                    <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
-                                    <h3 class="product-title">@book.Name</h3>
-                                    <strong class="product-price">@book.Price</strong>
-                                </a>
-                                <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
-                                    <span class="icon-cross">
-                                        <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
+                                            <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
+                                            <h3 class="product-title">@book.Name</h3>
+                                            <strong class="product-price">@book.Price</strong>
+                                        </a>
+                                        @if (!ViewBag.BooksNames.Contains(book.Name))
+                                        {
+                                            <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
+                                                <span class="icon-cross">
+                                                    <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                                </span>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
                             }
                         }
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-8">
                     <div class="section-title">
-                        <h5>From Same Year</h5>
+                        <h5>صدر بنفس العام</h5>
                     </div>
                     <div class="row">
                         @{
@@ -120,11 +130,14 @@
                                             <h3 class="product-title">@book.Name</h3>
                                             <strong class="product-price">@book.Price</strong>
                                         </a>
-                                        <a asp-controller="Cart" asp-action="Add" asp-route-id="@book.Id">
-                                            <span class="icon-cross">
-                                                <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                            </span>
-                                        </a>
+                                        @if (!ViewBag.BooksNames.Contains(book.Name))
+                                        {
+                                            <a href="#" onclick="AddToCart(@book.Id)">
+                                                <span class="icon-cross">
+                                                    <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                                </span>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             }
@@ -136,44 +149,28 @@
     </div>
 </section>
 
-@section Scripts{
+@section Scripts {
     <script>
-        function addToCart(Id) {
-            let quan = document.getElementById('Quantity').value;
+        function AddToCart(Id) {
+            event.preventDefault();
+
+            console.log(Id);
             $.ajax({
                 type: "POST",
                 url: "/Cart/Add",
                 data: {
                     "bookId": Id,
-                    "quantity": quan
+                    "quantity": 1
                 },
-                success: function (response) {
-                    if (response.success) {
-                        alert(response.message);
-                    } else {
-                        alert("Failed to add product.");
-                    }
+                success: function (result) {
+                    console.log("Success");
+                    // document.getElementById("oneTotal"+Id).innerHTML = result.oneTotal;
                 },
-                error: function () {
-                    alert("An error occurred.");
+                error: function (result) {
+                    console.log("error");
                 }
             });
+            document.getElementById("Added" + Id).outerHTML = "";
         }
     </script>
-    @* <script>
-        function addToCart(Id) {
-            console.log(Id);
-            $.ajax({
-                url: "/Cart/Add",
-                data: { "deptId": deptID },
-                type: "GET",
-                success: function (result) {
-                    console.log(result);
-                    document.getElementById("RelativeInstructors").innerHTML = result;
-                }
-            });
-        }
-    </script> *@
-
-
 }

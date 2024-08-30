@@ -19,7 +19,8 @@
                                 <th class="product-quantity">Quantity</th>
                                 <th class="product-total">Total</th>
                                 <th class="product-remove">Remove</th>
-                                <th class="product-remove"></th>
+                                @*                                 <th class="product-remove"></th>
+                                *@
                             </tr>
                         </thead>
                         <tbody>
@@ -37,17 +38,17 @@
                                         <td>
                                             <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
                                                 <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-black decrease" type="button">−</button>
+                                                    <a href="#" onclick="changeQuantity(@item.ItemId, 'nig', @item.BookPrice)" class="btn btn-outline-black decrease" type="button">−</a>
                                                 </div>
-                                                <input type="text" class="form-control text-center quantity-amount" value="@item.Quantity" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                                <input disabled id="itemQuantity@(item.ItemId)" type="text" class="form-control text-center quantity-amount" value="@item.Quantity">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-outline-black increase" type="button">+</button>
+                                                    <a href="#" onclick="changeQuantity(@item.ItemId, 'pos', @item.BookPrice)" class="btn btn-outline-black increase" type="button">+</a>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>@item.TotalPriceOfOneCartItem </td>
-                                        <td><a asp-controller="Cart" asp-action="Delete" asp-route-itemid="@item.ItemId" class="btn btn-black btn-sm">X</a></td>
-                                        <td><a asp-controller="Payment" asp-action="Start" asp-route-itemid="@item.ItemId" class="btn btn-black btn-sm">Pay Now</a></td>
+                                        <td id="oneTotal@(item.ItemId)">@item.TotalPriceOfOneCartItem </td>
+                                        <td><a asp-controller="Cart" asp-action="Delete" asp-route-itemId="@item.ItemId" class="btn btn-black btn-sm">X</a></td>
+                                        @* <td><a asp-controller="Payment" asp-action="Start" asp-route-itemid="@item.ItemId" class="btn btn-black btn-sm">Pay Now</a></td>*@
                                     </tr>
                                 }
                             }
@@ -60,11 +61,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row mb-5">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <button class="btn btn-black btn-sm btn-block">Update Cart</button>
-                    </div>
                     <div class="col-md-6">
-                        <button class="btn btn-outline-black btn-sm btn-block">Continue Shopping</button>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-black btn-sm btn-block">Continue Shopping</a>
                     </div>
                 </div>
                 @* <div class="row">
@@ -93,26 +91,58 @@
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
-                                </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div class="col-md-6">
-                                    <span class="text-black">Total</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong id="AllTotal" class="text-black">@ViewBag.Total</strong>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button class="btn btn-black btn-lg py-3 btn-block" asp-controller="Payment" asp-action="Checkout">Proceed To Checkout</button>
-                                </div>
+
+                            @* <div class="row">
+                            <div class="col-md-12">
+                            <button class="btn btn-black btn-lg py-3 btn-block" asp-controller="Payment" asp-action="Checkout">Proceed To Checkout</button>
                             </div>
+                            </div> *@
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @section Scripts {
+        <script>
+            function changeQuantity(Id, change, price) {
+                event.preventDefault();
+                console.log(price);
+                let allTotal = document.getElementById("AllTotal").innerHTML;
+
+                let Quantity = Number(document.getElementById("itemQuantity" + Id).value);
+                let newQuantity;
+                if (change == "pos") {
+                    newQuantity = Number(Quantity + 1);
+                }
+                else {
+                    newQuantity = Number(Quantity - 1);
+                }
+
+                console.log(newQuantity);
+                $.ajax({
+                    type: "POST",
+                    url: "/Cart/ChangeQuantity",
+                    data: {
+                        "cartId": Id,
+                        "newQuantity": newQuantity,
+                        "price": price,
+                        "allTotal": allTotal
+                    },
+                    success: function (result) {
+                        console.log("Success");
+                        document.getElementById("oneTotal"+Id).innerHTML = result.oneTotal;
+                        document.getElementById("AllTotal").innerHTML = result.allTotal;
+                    },
+                    error: function (result) {
+                        console.log("error");
+                    }
+                });
+            }
+        </script>
+    }

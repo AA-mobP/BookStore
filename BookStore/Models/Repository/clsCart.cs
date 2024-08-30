@@ -27,9 +27,10 @@ namespace BookStore.Models.Repository
             context.SaveChanges();
         }
 
-        public void RemoveFromCart(int bookId, string userId)
+        public void RemoveFromCart(int itemsId)
         {
-            BookUserModel cart = context.CartItems.First(x => x.BookId == bookId & x.UserId == userId);
+            
+            BookUserModel cart = context.CartItems.First(x => x.CartId == itemsId);
 
             context.CartItems.Remove(cart);
             context.SaveChanges();
@@ -45,6 +46,13 @@ namespace BookStore.Models.Repository
                 total += item.Book.Price * item.Quantity;
             }
             return total;
+        }
+
+        public void EditQuantity(int itemId, int newQuantity)
+        {
+            var v = context.CartItems.Single(x => x.CartId == itemId);
+            v.Quantity = newQuantity;
+            context.SaveChanges();
         }
     }
 }

@@ -9,27 +9,25 @@
         <div class="row justify-content-between">
             <div class="col-lg-5">
                 <div class="intro-excerpt">
-                    <h1>Modern Interior <span clsas="d-block">Design Studio</span></h1>
-                    <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-                    <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                    <h1>دار مكتبة <span clsas="d-block">لنشر الكتب</span></h1>
+                    <p class="mb-4">ترحب بكم في منصتها.</p>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="hero-img-wrap">
-                    <img src="~/Assets/images/Books.png" class="img-fluid">
+                    <img src="~/Assets/images/Books1.png" class="img-fluid">
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- End Start Hero Section -->
-
 <!-- Start Book Section -->
-<div class="product-section">
+<div style="direction:rtl" class="product-section">
     <div class="container">
         <div class="row">
             @{
-                foreach(BooksViewModel book in Model)
+                foreach (BooksViewModel book in Model)
                 {
                     <div class="col-12 col-md-4 col-lg-3 mb-5">
                         <div class="product-item">
@@ -38,11 +36,17 @@
                                 <h3 class="product-title">@book.Name</h3>
                                 <strong class="product-price">@book.Price</strong>
                             </a>
-                            <button onclick="addToCart(@book.Id, 1)">
-                                <span class="icon-cross">
-                                    <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                </span>
-                            </button>
+                            @{
+                                if (!ViewBag.BooksNames.Contains(book.Name))
+                                {
+                                    <a id="Added@(book.Id)" href="#" onclick="AddToCart(@book.Id)">
+                                        <span class="icon-cross">
+                                            <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                        </span>
+                                    </a>
+                                }
+                            }
+
                         </div>
                     </div>
                 }
@@ -51,27 +55,28 @@
     </div>
 </div>
 <!-- End Book Section -->
-@section Scripts{
+@section Scripts {
     <script>
-        function addToCart(Id, quan) {
+        function AddToCart(Id) {
+            event.preventDefault();
+
+            console.log(Id);
             $.ajax({
                 type: "POST",
                 url: "/Cart/Add",
                 data: {
-                    bookId: Id,
-                    quantity: quan
+                    "bookId": Id,
+                    "quantity": 1
                 },
-                success: function (response) {
-                    if (response.success) {
-                        alert(response.message);
-                    } else {
-                        alert("Failed to add product.");
-                    }
+                success: function (result) {
+                    console.log("Success");
+                    // document.getElementById("oneTotal"+Id).innerHTML = result.oneTotal;
                 },
-                error: function () {
-                    alert("An error occurred.");
+                error: function (result) {
+                    console.log("error");
                 }
             });
+            document.getElementById("Added" + Id).innerHTML = "";
         }
     </script>
 }

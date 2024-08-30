@@ -22,19 +22,28 @@ namespace BookStore.Controllers
         public IActionResult Index()
         {
             List<CartItemModel> items = cart.GetCartItems(userManagaer.GetUserId(User));
+            ViewData["Total"] = cart.GetTotalPrice(userManagaer.GetUserId(User));
             return View(items);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Add(int bookId, int quantity = 1)
         {
             cart.AddToCart(bookId, userManagaer.GetUserId(User), quantity);
-            return Json(new {success = true, message = "Product added successfully." });
+            return Json(new { success = true });
         }
-        public IActionResult Delete(int bookId)
+        
+        public IActionResult Delete(int itemId)
         {
-            return View();
+            cart.RemoveFromCart(itemId);
+            return RedirectToAction("Index");
         }
-
+        [HttpPost]
+        public IActionResult ChangeQuantity(int cartId, int newQuantity, decimal price, decimal allTotal)
+        {
+            cart.EditQuantity(cartId, newQuantity);
+            decimal onetPrice = price * newQuantity;
+            decimal allPrice = allTotal + price;
+            return Json(new { success = true, oneTotal = onetPrice, allTotal = allPrice});
+        }
     }
 }
