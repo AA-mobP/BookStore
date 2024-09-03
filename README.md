@@ -64,7 +64,11 @@ The website is live and can be accessed at: [Maktaba Bookstore](https://bookstor
 
 ## Screenshots
 ![bookstoreImage1](https://github.com/user-attachments/assets/241c2208-53e7-4131-a78c-6db80a41930f)
+
 ![bookstore](https://github.com/user-attachments/assets/cf69c209-ee79-46c8-90fe-9be7d34b9dc9)
+
 ![bookstoreImage2](https://github.com/user-attachments/assets/3e44855c-493a-48b7-a1cb-68f0de0c337c)
-![bookstoreImage3](https://github.com/user-attachments/assets/c743f5f4-e5ee-435d-a595-f0e45c610ae9)
+
+![bookstoreImage3](https://github.com/user-attachments/assets/92bd043e-4950-4a0f-b3b1-8f9a294add5a)
+
 ![bookstoreImage4](https://github.com/user-attachments/assets/a25d8c94-59ec-4baf-9f7c-fb615123deec)
