@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BookStore.Models.GenreModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container mb-5 mt-5">
+    <h1>Index</h1>
+
+    <p>
+        <a class="btn-sm btn-primary" asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a class="btn-sm btn-success" asp-action="Edit" asp-route-id="@item.GenreId">Edit</a> |
+                        <a class="btn-sm btn-warning" asp-action="Details" asp-route-id="@item.GenreId">Details</a> |
+                        <a class="btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.GenreId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

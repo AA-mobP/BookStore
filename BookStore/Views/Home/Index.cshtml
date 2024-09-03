@@ -1,5 +1,5 @@
 ﻿@using BookStore.Models.ViewModels
-@model List<BooksViewModel>
+@model List<BooksViewModel>?
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,15 +7,15 @@
 <div class="hero">
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-lg-5">
-                <div class="intro-excerpt">
+            <div class="col-xl-5 col-lg-3 col-md-6 col-7">
+                <div style="direction:rtl;" class="intro-excerpt">
                     <h1>دار مكتبة <span clsas="d-block">لنشر الكتب</span></h1>
                     <p class="mb-4">ترحب بكم في منصتها.</p>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-xl-7 col-lg-9 col-md-6 col-5">
                 <div class="hero-img-wrap">
-                    <img src="~/Assets/images/Books1.png" class="img-fluid">
+                    <img style="pointer-events: none;" src="~/Assets/images/Books.png" class="img-fluid col-12">
                 </div>
             </div>
         </div>
@@ -27,28 +27,31 @@
     <div class="container">
         <div class="row">
             @{
-                foreach (BooksViewModel book in Model)
+                if (Model != null)
                 {
-                    <div class="col-12 col-md-4 col-lg-3 mb-5">
-                        <div class="product-item">
-                            <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
-                                <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
-                                <h3 class="product-title">@book.Name</h3>
-                                <strong class="product-price">@book.Price</strong>
-                            </a>
-                            @{
-                                if (!ViewBag.BooksNames.Contains(book.Name))
-                                {
-                                    <a id="Added@(book.Id)" href="#" onclick="AddToCart(@book.Id)">
-                                        <span class="icon-cross">
-                                            <img src="~/Assets/images/cross.svg" class="img-fluid">
-                                        </span>
-                                    </a>
+                    foreach (BooksViewModel book in Model)
+                    {
+                        <div class="col-4 col-md-3 mb-5">
+                            <div class="product-item">
+                                <a asp-controller="Details" asp-action="Index" asp-route-id="@book.Id">
+                                    <img src="~/Assets/images/@book.Photo" class="img-fluid product-thumbnail">
+                                    <h3 class="product-title">@book.Name</h3>
+                                    <strong class="product-price">@book.Price</strong>
+                                </a>
+                                @{
+                                    if (!ViewBag.BooksNames.Contains(book.Name))
+                                    {
+                                        <a id="Added@(book.Id)" href="#" onclick="AddToCart(@book.Id)">
+                                            <span class="icon-cross">
+                                                <img src="~/Assets/images/cross.svg" class="img-fluid">
+                                            </span>
+                                        </a>
+                                    }
                                 }
-                            }
 
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
             }
         </div>

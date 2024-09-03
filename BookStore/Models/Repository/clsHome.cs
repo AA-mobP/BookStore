@@ -11,7 +11,7 @@ namespace BookStore.Models.BusinessLayer
             context = dbContext;
         }
 
-        public List<BooksViewModel> ShowAll()
+        public List<BooksViewModel>? ShowAll()
         {
             var result =  context.tblBooks.Select(b =>
             new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName}).ToList();

@@ -35,12 +35,17 @@ namespace BookStore
                 options.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<BookDbContext>()
             .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/identity/account/login";
+            });
+
             builder.Services.AddTransient<IEmailSender, EmailSender>();
-            
             builder.Services.AddScoped<IclsHome, clsHome>();
             builder.Services.AddScoped<IclsDetails, clsDetails>();
             builder.Services.AddScoped<IclsProfile, clsProfile>();
             builder.Services.AddScoped<IclsCart, clsCart>();
+            builder.Services.AddScoped<IclsBook, clsBook>();
 
             var app = builder.Build();
 
@@ -51,22 +56,22 @@ namespace BookStore
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
-
-			app.MapControllerRoute(
-               name: "area",
-               pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.MapControllerRoute(
+               name: "area",
+               pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.UseEndpoints(endpoint => endpoint.MapRazorPages());
 

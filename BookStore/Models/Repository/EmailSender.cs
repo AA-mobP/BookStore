@@ -10,8 +10,8 @@ namespace BookStore.Models.Repository
         {
             //string fromEmail = "ahmed-abdelhady-iti-s24@outlook.com";
             //string fromPassword = "ITI-S24-AhAb";
-            string fromEmail = "abdelhady-ashraf7655@outlook.com";
-            string fromPassword = "me1me2ma7655";
+            string fromEmail = "abdoashraf221095@gmail.com";
+            string fromPassword = "llumbuofykdscslx";
 
             MailMessage message = new MailMessage();
             message.From = new MailAddress(fromEmail);
@@ -20,11 +20,11 @@ namespace BookStore.Models.Repository
             message.Body = $"<html><body>{htmlMessage}</body></html>";
             message.IsBodyHtml = true;
 
-            SmtpClient smtpClient = new SmtpClient(host: "smtp-mail.outlook.com")
+            SmtpClient smtpClient = new SmtpClient(host: "smtp.gmail.com")
             {
                 Port = 587,
                 Credentials = new NetworkCredential(fromEmail, fromPassword),
-                EnableSsl = true
+                EnableSsl = true,
             };
             smtpClient.Send(message);
         }

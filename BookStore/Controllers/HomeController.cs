@@ -24,7 +24,7 @@ namespace BookStore.Controllers
 
         public IActionResult Index()
         {
-            ViewData["BooksNames"] = cart.GetCartItems(userManager.GetUserId(User)).Select(c => c.BookName).ToList();
+            ViewData["BooksNames"] = cart?.GetCartItems(userManager.GetUserId(User))?.Select(c => c.BookName).ToList();
             return View(_home.ShowAll());
         }
 

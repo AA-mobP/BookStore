@@ -6,6 +6,8 @@ namespace BookStore.Models.BusinessLayer
     public class clsDetails : IclsDetails
     {
         private readonly BookDbContext context;
+        public int CurrentBookId { get; set; }
+        private Random random;
 
         public clsDetails(BookDbContext dbContext)
         {
@@ -19,19 +21,22 @@ namespace BookStore.Models.BusinessLayer
 
         public List<BooksViewModel> GetRelevantAuthor(string author, int count)
         {
-            var result = context.tblBooks.Where(b => b.AuthorName.ToLower() == author).Select(b => new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName }).Take(count).ToList();
+            random = new Random();
+            var result = context.tblBooks.Where(b => b.AuthorName == author && b.BookId != CurrentBookId).Select(b => new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName }).Take(count).ToList();
             return result;
         }
 
         public List<BooksViewModel> GetRelevantType(string type, int count)
         {
-            List<BooksViewModel> books = context.tblBooks.Where(b => b.Type.ToLower() == type).Select(b => new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName }).Take(count).ToList();
+            random = new Random();
+            List<BooksViewModel> books = context.tblBooks.Where(b => b.Type == type && b.BookId != CurrentBookId).Select(b => new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName }).Take(count).ToList();
             return books;
         }
 
         public List<BooksViewModel> GetRelevantYear(int year, int count)
         {
-            List<BooksViewModel> books = context.tblBooks.Where(b => b.PublishYear == year).Select(b => new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName }).Take(count).ToList();
+            random = new Random();
+            List<BooksViewModel> books = context.tblBooks.Where(b => b.PublishYear == year & b.BookId != CurrentBookId).Select(b => new BooksViewModel { Id = b.BookId, Name = b.Name, Price = b.Price, Photo = b.PhotoName }).Take(count).ToList();
             return books;
         }
 

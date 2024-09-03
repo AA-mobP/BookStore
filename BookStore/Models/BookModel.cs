@@ -10,6 +10,7 @@ namespace BookStore.Models
         public BookModel()
         {
             CartItems = new List<BookUserModel>();
+            Genres = new List<GenreModel>();
         }
 
         [Key]

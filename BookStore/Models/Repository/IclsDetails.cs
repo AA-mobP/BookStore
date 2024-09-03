@@ -4,6 +4,7 @@ namespace BookStore.Models.BusinessLayer
 {
     public interface IclsDetails
     {
+        int CurrentBookId { get; set; }
         BookModel GetBook(int id);
         List<BooksViewModel> GetRelevantAuthor(string author, int count);
         List<BooksViewModel> GetRelevantType(string type, int count);
